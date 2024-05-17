@@ -1,0 +1,109 @@
+:root {
+    --sw-bg: rgb(103, 6, 168);
+    --sw-width: 100%;
+    --sw-max-width: 500px;
+    --sw-color: #0a1b18;
+    --sw-radius: 50% 5% 50% 50%;
+    --sw-wheel-border-color: blue;
+    --sw-wheel-text-color: lightblue;
+    --sw-btn-size:20%;
+    --sw-btn-bg: var(--dw-wheel-border-color);
+    --sw-btn-text-color: var(--dw-wheel-text-color);
+    --sw-marker-color: cyan;
+    --sw-marker-width:20px;
+    --sw-marker-height:70px;
+    --sw-marker-position:50px;
+    --sw-font-size: 1.5rem;
+}
+.single-wheel {
+    aspect-ratio: 1/1;
+    width: var(--sw-width);
+    max-width: var(--sw-max-width);
+    background: var(--sw-bg);
+    padding:1rem;
+    border-radius: var(--sw-radius);
+
+    .spinBtn
+    {
+        position:absolute;
+        aspect-ratio: 1/1;
+        width: var(--sw-btn-size);
+        /* height: 25%; */
+        background: var(--sw-btn-bg);
+        color: var(--sw-btn-text-color);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: uppercase;
+        letter-spacing: .3em;
+        font-size: 3fr;
+        font-weight: 700;
+        filter: drop-shadow(0 0 5px var(--sw-btn-bg));
+        cursor: pointer;
+        z-index:2;
+        border: 2px solid var(--sw-wheel-border-color);
+
+        &::before
+        {
+            content: "";
+            position:absolute;
+            bottom: calc(60% + var(--sw-btn-size));
+            
+            border: var(--sw-marker-width) solid transparent;
+            border-bottom: var(--sw-marker-height) solid var(--sw-btn-bg);
+        }
+    }
+
+    .wheel
+    {
+        position: absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        background:var(--sw-color);
+        border-radius: 50%;
+         overflow: hidden;
+         transition: transform 5s ease-in-out;
+    }
+    .wheel.shadow{
+        box-shadow: 0 0 0 5px var(--sw-wheel-text-color),
+            0 0 0 10px var(--sw-wheel-border-color),
+            0 0 0 15px var(--sw-color);
+    }
+
+    .number
+    {
+        position:absolute;
+        aspect-ratio: 1/1;
+        width:50%;
+        transform-origin: bottom right;
+        transform: rotate(calc(45deg * var(--i)));
+        background:var(--clr);
+        clip-path: polygon(0 0,56% 0,100% 100%, 0 56%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span
+        {
+            
+            position:relative;
+            transform:rotate(45deg);
+            font-weight: 700;
+            font-size: var(--sw-font-size);
+            color:var(--sw-color);
+            text-shadow: 1px 2px 3px var(--sw-btn-text-color);
+
+            &::before
+            {
+                content: "$";
+                position: absolute;
+                left:calc((1rem - var(--sw-font-size)) - .4rem);
+                font-size:calc(var(--sw-font-size) - .3rem);
+
+            }
+        }
+    }
+}
